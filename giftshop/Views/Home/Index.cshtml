@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h2>List of products</h2>
+<hr />
+<div ng-app="giftshop">
+    <div ng-controller="ProductController">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="container">
+                    <div>
+                        <table id="entry-grid" datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-hover"></table>
+                    </div>
+                </div>
+                <div class="modal fade modal-overflow bs-modal-lg in" id="productmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#cb5a5e; color:white;">
+                                <h4 class="modal-title">{{product}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <strong>Description:</strong> <h5>{{desc}}</h5>
+                                <strong>SKU:</strong> <h5>{{sku}}</h5>
+                                <strong>Price:</strong> <h5>{{price | currency}}</h5>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn default" data-dismiss="modal" id="">Cerrar</button>
+                                <button type="button" class="btn green" id="btnAddCar" ng-click="PushSelectedProduct(productID)"><i class="fa fa-check"></i>Add to car</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 carrito">
+                <h4><i class="fa fa-shopping-cart"></i> Shopping car</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="product in shoppingcar">
+                        {{product.Product}}
+                        <strong class="pull-right">{{product.Price | currency}}</strong>
+                    </li>
+                </ul>
+                <h2>Total: {{total() | currency}}</h2> <br />
+                <button type="button" class="btn red" id="" ng-click="clearshoppingcar()">Clear car</button>
+                <button type="button" class="btn green" id="btnPaySelectedArticles" ng-click="showSummary()"><i class="fab fa-cc-visa"></i> Pay</button>
+            </div>
+            <div class="modal fade modal-overflow bs-modal-lg in" id="purchasesummary" tabindex="-1" role="dialog" aria-hidden="true" >
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#cb5a5e; color:white;">
+                            <h4 class="modal-title">Your products</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4><i class="fa fa-shopping-cart"></i> Shopping car - Purchase summary</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="product in shoppingcar">
+                                    {{product.Product}}
+                                    <strong class="pull-right">{{product.Price | currency}}</strong>
+                                </li>
+                            </ul>
+                            <h2>Total: {{total() | currency}}</h2> <br />
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal" id="">Ok</button>                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
